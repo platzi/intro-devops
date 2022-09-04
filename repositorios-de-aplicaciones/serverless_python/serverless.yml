@@ -1,0 +1,17 @@
+service: pythonlambda
+
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: python3.8
+  stage: dev
+ 
+functions:
+  api:
+    handler: app.handler
+    events:
+      - httpApi: '*'
+
+plugins:
+  - serverless-python-requirements

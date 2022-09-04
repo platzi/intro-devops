@@ -1,0 +1,100 @@
+<div></div>
+&nbsp;&nbsp;
+&nbsp;&nbsp;<mat-form-field>
+  <mat-label>Filter</mat-label>
+  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Ex. ium">
+</mat-form-field>
+
+<div>
+
+  &nbsp;&nbsp;<button mat-raised-button  (click)="exporter.exportTable('xlsx', {fileName:'javatechiecovid19'})">Excel</button>
+  &nbsp;&nbsp;<button mat-raised-button  (click)="exporter.exportTable('csv', {fileName:'javatechiecovid19'})">Csv</button>
+  &nbsp;&nbsp;<button mat-raised-button  (click)="exporter.exportTable('json', {fileName:'javatechiecovid19'})">Json</button>
+  &nbsp;&nbsp;<button mat-raised-button  (click)="exporter.exportTable('txt', {fileName:'javatechiecovid19'})">Txt</button>
+</div>
+<div>.</div>
+<div></div>
+<div class="mat-elevation-z8">
+<table mat-table matTableExporter [dataSource]="dataSource" #exporter="matTableExporter" [hiddenColumns]="[0]" matSort>
+
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+  
+    <!-- Position Column -->
+    <ng-container matColumnDef="country">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Country Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.country}} </td>
+    </ng-container>
+  
+    <!-- Name Column -->
+    <ng-container matColumnDef="cases">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Total Cases </th>
+      <td mat-cell *matCellDef="let element"> {{element.cases}} </td>
+    </ng-container>
+  
+    <!-- Weight Column -->
+    <ng-container matColumnDef="todayCases">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Today Cases </th>
+      <td mat-cell *matCellDef="let element"> {{element.todayCases}} </td>
+    </ng-container>
+  
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="deaths">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Total Death </th>
+      <td mat-cell *matCellDef="let element"> {{element.deaths}} </td>
+    </ng-container>
+  
+     <!-- Position Column -->
+     <ng-container matColumnDef="todayDeaths">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Today Death </th>
+        <td mat-cell *matCellDef="let element"> {{element.todayDeaths}} </td>
+      </ng-container>
+    
+      <!-- Name Column -->
+      <ng-container matColumnDef="recovered">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Recovered </th>
+        <td mat-cell *matCellDef="let element"> {{element.recovered}} </td>
+      </ng-container>
+    
+      <!-- Weight Column -->
+      <ng-container matColumnDef="active">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Active </th>
+        <td mat-cell *matCellDef="let element"> {{element.active}} </td>
+      </ng-container>
+    
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="critical">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Critical </th>
+        <td mat-cell *matCellDef="let element"> {{element.critical}} </td>
+      </ng-container>
+
+       <!-- Position Column -->
+    <ng-container matColumnDef="casesPerOneMillion">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Cases/1M </th>
+        <td mat-cell *matCellDef="let element"> {{element.casesPerOneMillion}} </td>
+      </ng-container>
+    
+      <!-- Name Column -->
+      <ng-container matColumnDef="deathsPerOneMillion">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Death/1M </th>
+        <td mat-cell *matCellDef="let element"> {{element.deathsPerOneMillion}} </td>
+      </ng-container>
+    
+      <!-- Weight Column -->
+      <ng-container matColumnDef="tests">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Total test </th>
+        <td mat-cell *matCellDef="let element"> {{element.tests}} </td>
+      </ng-container>
+    
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="testsPerOneMillion">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Test/1M </th>
+        <td mat-cell *matCellDef="let element"> {{element.testsPerOneMillion}} </td>
+      </ng-container>
+      
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+</div>

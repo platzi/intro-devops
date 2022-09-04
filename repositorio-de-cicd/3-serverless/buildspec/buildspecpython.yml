@@ -1,0 +1,16 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      python: 3.8
+    commands:
+      - npm install --silent --no-progress -g serverless@3.16.0
+      - serverless plugin install -n serverless-python-requirements
+  build:
+    commands:
+      - serverless deploy
+
+  post_build:
+    commands:
+      - echo "run tests here"

@@ -1,0 +1,18 @@
+version: 0.2
+phases:
+  pre_build:
+    commands:
+      - echo installing dependencies...
+  build:
+    commands:
+        - echo Build started 
+        - ls
+        - echo $DOCKERHUB_PASS | docker login --username $DOCKERHUB_USER --password-stdin
+        - sed -i "s/--HOST--/$BD_HOST/g" "$(pwd)/conf/flyway.conf" 
+        - sed -i "s/--PORT--/$BD_PORT/g" "$(pwd)/conf/flyway.conf"
+        - sed -i "s/--USER--/$BD_USER/g" "$(pwd)/conf/flyway.conf"
+        - sed -i "s/--PASS--/$BD_PASS/g" "$(pwd)/conf/flyway.conf"
+        - cat $(pwd)/conf/flyway.conf
+        - docker run --rm -v $(pwd)/sql:/flyway/sql -v $(pwd)/conf:/flyway/conf flyway/flyway  migrate
+
+

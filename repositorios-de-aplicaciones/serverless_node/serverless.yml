@@ -1,0 +1,14 @@
+service: aws-node-nuevo # NOTE: update this with your service name
+
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  iam:	
+    role: arn:aws:iam::561607169148:role/simpsonback-LambdaRole-80TOV7PH9XZJ                                                               
+	
+ 
+functions:
+  hello:
+    handler: handler.hello
